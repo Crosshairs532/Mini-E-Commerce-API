@@ -1,16 +1,19 @@
 import { model, Schema } from "mongoose";
 import { TUser, UserModelType } from "./user.interface";
 import { configFiles } from "../../config";
-const bcrypt = require("bcrypt");
+import bcrypt from "bcryptjs";
+
 const userSchema = new Schema<TUser, UserModelType>(
   {
     name: {
       type: String,
+      required: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
+      index: true,
     },
     password: {
       type: String,
@@ -32,6 +35,8 @@ const userSchema = new Schema<TUser, UserModelType>(
 // hash password before saving
 userSchema.pre("save", async function () {
   const user = this;
+
+  console.log(user);
   try {
     const hash = await bcrypt.hash(
       user.password,
@@ -47,8 +52,8 @@ userSchema.post("save", function (doc, next) {
   next();
 });
 
-userSchema.statics.isUserExist = async function (id: string) {
-  return userModel.findOne({ id }).select("+password");
+userSchema.statics.isUserExist = async function (email: string) {
+  return userModel.findOne({ email }).select("+password");
 };
 
 userSchema.statics.checkPassword = async function (loginPass, storedPass) {

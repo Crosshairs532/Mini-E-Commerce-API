@@ -12,5 +12,4 @@ export interface TUser {
 export interface UserModelType extends Model<TUser> {
   isUserExist(id: string): Promise<TUser>;
   checkPassword(loginPass: string, storedPass: string): Promise<boolean>;
-  JwtIssueCheck(passwordChange: Date, issueDate: number): boolean;
 }
