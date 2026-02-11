@@ -1,15 +1,18 @@
-## Project Installation:
+## Project Setup instructions:
 
-## Dependencies & dev-dependencies:
-
-1.
+open you terminal and follow the below instructions
 
 ```bash
-   npm install express mongoose dotenv bcryptjs jsonwebtoken cors
+    git clone https://github.com/Crosshairs532/Mini-E-Commerce-API.git
+    cd Mini-E-Commerce-API
+    npm i
+    npm run start_dev
 ```
 
+## Tech stack used
+
 ```bash
-npm install --save-dev nodemon
+    Mongoose, Zod, Express.js, MongoDb, Typescript
 ```
 
 ## Assumptions made:
@@ -19,3 +22,5 @@ npm install --save-dev nodemon
 - Assuming basic product search Functionality. Search product on only name and Description
 - instead deleting the whole product, Updating isDeleted field on product. So that we do not have to create the product from the beginning.
 -
+
+## Diagram
