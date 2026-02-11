@@ -3,6 +3,10 @@ import { TUser, UserModelType } from "./user.interface";
 import { configFiles } from "../../config";
 import bcrypt from "bcryptjs";
 
+export enum UserRole {
+  ADMIN = "admin",
+  CUSTOMER = "customer",
+}
 const userSchema = new Schema<TUser, UserModelType>(
   {
     name: {
@@ -20,11 +24,11 @@ const userSchema = new Schema<TUser, UserModelType>(
       required: true,
       select: 0,
     },
-
     role: {
       type: String,
-      enum: ["user", "admin"],
+      enum: ["customer", "admin"],
       required: true,
+      default: UserRole.CUSTOMER,
     },
   },
   {
@@ -59,5 +63,4 @@ userSchema.statics.isUserExist = async function (email: string) {
 userSchema.statics.checkPassword = async function (loginPass, storedPass) {
   return await bcrypt.compare(loginPass, storedPass);
 };
-
 export const userModel = model<TUser, UserModelType>("User", userSchema);

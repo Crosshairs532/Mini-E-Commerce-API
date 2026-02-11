@@ -1,6 +1,6 @@
 import { Model } from "mongoose";
 
-export type Role = "user" | "admin";
+export type Role = "customer" | "admin";
 export interface TUser {
   name: string;
   email: string;
