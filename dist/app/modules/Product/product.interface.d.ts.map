@@ -1,0 +1,1 @@
+{"version":3,"file":"product.interface.d.ts","sourceRoot":"","sources":["../../../../src/app/modules/Product/product.interface.ts"],"names":[],"mappings":"AAAA,MAAM,MAAM,QAAQ,GAAG;IACrB,IAAI,EAAE,MAAM,CAAC;IACb,WAAW,EAAE,MAAM,CAAC;IACpB,KAAK,EAAE,MAAM,CAAC;IACd,KAAK,EAAE,MAAM,CAAC;IACd,SAAS,EAAE,OAAO,CAAC;CACpB,CAAC"}

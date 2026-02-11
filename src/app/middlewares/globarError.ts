@@ -1,7 +1,7 @@
 import { ErrorRequestHandler } from "express";
 import httpStatus from "http-status";
 import { ZodError } from "zod";
-import { TErrorSources } from "../interface/error";
+import { TerrorSource } from "../interface/error";
 import {
   handleCastError,
   handleDuplicateError,
@@ -14,7 +14,7 @@ const globalError: ErrorRequestHandler = (err, req, res, next) => {
   let statusCode = err.status || httpStatus.INTERNAL_SERVER_ERROR || 500;
   let message = err.message || "Something went Wrong";
 
-  let errorSource: TErrorSources = [
+  let errorSource: any = [
     {
       path: "",
       message: "Something went wrong",
@@ -25,22 +25,22 @@ const globalError: ErrorRequestHandler = (err, req, res, next) => {
     const simplifiedError = handleZodError(err);
     statusCode = simplifiedError?.statusCode;
     message = simplifiedError?.message;
-    errorSource = simplifiedError?.errorSources;
+    errorSource = simplifiedError?.errorSource;
   } else if (err.name === "ValidationError") {
     const simplifiedError = handleValidationError(err);
     statusCode = simplifiedError?.statusCode;
     message = simplifiedError?.message;
-    errorSource = simplifiedError?.errorSources;
+    errorSource = simplifiedError?.errorSource;
   } else if (err.name === "castError") {
     const simplifiedError = handleCastError(err);
     statusCode = simplifiedError?.statusCode;
     message = simplifiedError?.message;
-    errorSource = simplifiedError?.errorSources;
+    errorSource = simplifiedError?.errorSource;
   } else if (err.code === 11000) {
     const simplifiedError = handleDuplicateError(err);
     statusCode = simplifiedError?.statusCode;
     message = simplifiedError?.message;
-    errorSource = simplifiedError?.errorSources;
+    errorSource = simplifiedError?.errorSource;
   } else if (err instanceof AppError) {
     statusCode = err?.statusCode;
     message = err.message;

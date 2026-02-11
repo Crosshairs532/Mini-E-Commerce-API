@@ -1,39 +1,35 @@
 import mongoose from "mongoose";
-import { TErrorSources, TGenericErrorResponse } from "../interface/error";
+import { TerrorSource, TGenericErrorResponse } from "../interface/error";
 import { ZodError } from "zod";
 
 export const handleCastError = (
   err: mongoose.Error.CastError,
 ): TGenericErrorResponse => {
   const statusCode = 400;
-  const errorSources: TErrorSources = [
-    { path: err.path, message: err.message },
-  ];
+  const errorSource: TerrorSource = [{ path: err.path, message: err.message }];
   return {
     statusCode,
     message: "Invalid Id",
-    errorSources,
+    errorSource,
   };
 };
 
-export const handleDuplicateError = (err: any): TGenericErrorResponse => {
+export const handleDuplicateError = (err: any) => {
   const statusCode = 400;
   const match = err.message.match(/"([^"]*)"/);
   const extracted_msg = match && match[1];
-  const errorSources: TErrorSources = [
+  const errorSource: TerrorSource = [
     { path: "", message: ` ${extracted_msg} is already exists ` },
   ];
   return {
     statusCode,
     message: "Duplicated Error",
-    errorSources,
+    errorSource,
   };
 };
 
-export const handleValidationError = (
-  err: mongoose.Error.ValidationError,
-): TGenericErrorResponse => {
-  const errorSources: TErrorSources = Object.values(err.errors).map((val) => {
+export const handleValidationError = (err: mongoose.Error.ValidationError) => {
+  const errorSource: TerrorSource = Object.values(err.errors).map((val) => {
     return {
       path: val.name,
       message: val.message,
@@ -43,11 +39,11 @@ export const handleValidationError = (
   return {
     statusCode,
     message: "validation Error",
-    errorSources,
+    errorSource,
   };
 };
 
-export const handleZodError = (err: ZodError): TGenericErrorResponse => {
+export const handleZodError = (err: ZodError) => {
   let statusCode = 400;
   let errorSource = err.issues.map((issue) => {
     return {

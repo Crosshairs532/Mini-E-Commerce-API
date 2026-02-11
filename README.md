@@ -1,4 +1,8 @@
-# Table of Contents
+# Mini-API
+
+[Live Demo](https://mini-e-commerce-api-ten.vercel.app/api/v1/)
+
+## Table of Contents
 
 1. [Project Setup Instructions](#project-setup-instructions)
    1. [Clone the repository](#clone-the-repository)
