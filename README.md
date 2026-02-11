@@ -24,3 +24,5 @@ open you terminal and follow the below instructions
 -
 
 ## Diagram
+
+![ER-diagram](./diagram.png)
