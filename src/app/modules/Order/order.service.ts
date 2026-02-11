@@ -5,6 +5,7 @@ import { OrderItemModel, OrderModel, OrderStatus } from "./order.model";
 import { CartModel } from "../Cart/cart.model";
 import { ProductModel } from "../Product/product.model";
 import { getUserWithEmail } from "../../utils/GetUser";
+import { userModel } from "../user/user.model";
 
 const createOrder = async (userEmail: string) => {
   const user = await getUserWithEmail(userEmail);
@@ -100,7 +101,6 @@ const createOrder = async (userEmail: string) => {
 
 const getMyOrders = async (userEmail: string) => {
   const user = await getUserWithEmail(userEmail);
-
   if (!user) {
     throw new AppError(status.UNAUTHORIZED, "User Does not Exist!");
   }
@@ -127,7 +127,11 @@ const getSingleOrder = async (orderId: string, userEmail: string) => {
   return order;
 };
 
-const updateOrderStatus = async (orderId: string, newStatus: OrderStatus) => {
+const updateOrderStatus = async (
+  user: any,
+  orderId: string,
+  newStatus: OrderStatus,
+) => {
   const order = await OrderModel.findById(orderId);
 
   if (!order) {
@@ -136,6 +140,20 @@ const updateOrderStatus = async (orderId: string, newStatus: OrderStatus) => {
 
   order.status = newStatus;
   await order.save();
+
+  // if customer
+  // check cancellation if it is customer otherwise leave it.
+  if (user.role == "customer") {
+    const updatedUser = await userModel.findOneAndUpdate(
+      { email: user.email, cancellationCount: { $lte: 5 } },
+      { $inc: { cancellationCount: 1 } },
+      { returnDocument: "after" },
+    );
+
+    if (!updatedUser) {
+      throw new AppError(status.FORBIDDEN, "User cancellation limit exceeded");
+    }
+  }
 
   return order;
 };

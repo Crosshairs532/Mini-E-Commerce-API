@@ -16,12 +16,12 @@ const getMyCart = async (userEmail: string) => {
     "items.product",
   );
 
-  //   if (!cart) {
-  //     cart = await CartModel.create({
-  //       user: user?._id,
-  //       items: [],
-  //     });
-  //   }
+  if (!cart) {
+    cart = await CartModel.create({
+      user: user?._id,
+      items: [],
+    });
+  }
 
   return cart;
 };
@@ -109,6 +109,7 @@ const removeFromCart = async (userEmail: string, productId: string) => {
     throw new AppError(status.NOT_FOUND, "Cart not found");
   }
 
+  // removing the product from the Array
   cart.items = cart.items.filter(
     (item) => item.product.toString() !== productId,
   );

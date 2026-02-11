@@ -1,23 +1,20 @@
 import express from "express";
 import { orderController } from "./order.controller";
-import auth from "../../middlewares/auth";
 import { UserRole } from "../user/user.model";
+import Auth from "../../middlewares/auth";
 
 const router = express.Router();
 
-router.post("/", auth(UserRole.CUSTOMER), orderController.createOrder);
-
-router.get("/my-orders", auth(UserRole.CUSTOMER), orderController.getMyOrders);
-
+router.post("/", Auth(UserRole.CUSTOMER), orderController.createOrder);
+router.get("/my-orders", Auth(UserRole.CUSTOMER), orderController.getMyOrders);
 router.get(
   "/:orderId",
-  auth(UserRole.CUSTOMER),
+  Auth(UserRole.CUSTOMER),
   orderController.getSingleOrder,
 );
-
 router.patch(
   "/:orderId/status",
-  auth(UserRole.ADMIN),
+  Auth(UserRole.ADMIN, UserRole.CUSTOMER),
   orderController.updateOrderStatus,
 );
 

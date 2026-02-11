@@ -37,7 +37,7 @@ const orderItemSchema = new Schema<TOrderItem>(
       min: 0,
     },
   },
-  { _id: false },
+  { _id: true },
 );
 
 const orderSchema = new Schema<TOrderSchema>(

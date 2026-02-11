@@ -14,7 +14,7 @@ const userValidation = z.object({
           : "Password must be a string",
     })
     .max(20, { message: "Password must be less than 20 characters" }),
-  role: z.enum(["user", "admin"]),
+  role: z.enum(["customer", "admin"]),
 });
 const userLogin = z.object({
   email: z.email("Invalid email"),
