@@ -18,6 +18,13 @@
    3. [Cart](#3-cart)
    4. [Orders](#4-orders)
 
+## Admin Credentials
+
+```bash
+    "email": "appifyDevs@gmail.com",
+    "password": "1234",
+```
+
 ## Project Setup instructions:
 
 open you terminal and follow the below instructions
@@ -44,6 +51,7 @@ open you terminal and follow the below instructions
     JWT_SECRET=""
     JWT_EXPIRE=""
     BCRYPT_SALT_ROUNDS=""
+
 ```
 
 4. Run the application:
