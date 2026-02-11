@@ -1,3 +1,19 @@
+# Table of Contents
+
+1. [Project Setup Instructions](#project-setup-instructions)
+   1. [Clone the repository](#clone-the-repository)
+   2. [Install dependencies](#install-dependencies)
+   3. [Environment Variables](#environment-variables)
+   4. [Run the application](#run-the-application)
+2. [Tech Stack Used](#tech-stack-used)
+3. [Diagram](#diagram)
+4. [Assumptions Made](#assumptions-made)
+5. [API Endpoints](#api-endpoints)
+   1. [Authentication](#1-authenticationauth)
+   2. [Products](#2-products)
+   3. [Cart](#3-cart)
+   4. [Orders](#4-orders)
+
 ## Project Setup instructions:
 
 open you terminal and follow the below instructions
