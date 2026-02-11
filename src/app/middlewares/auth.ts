@@ -12,11 +12,24 @@ const Auth = (...roles: string[]) => {
   return CatchAsync(async (req: Request, res: Response, next: NextFunction) => {
     // token from headers
     const token = req.headers.authorization?.split(" ")[1];
+    if (!token) {
+      throw new AppError(
+        status.UNAUTHORIZED,
+        "You must be logged in to access this feature",
+      );
+    }
     // decode the token
     const decodedToken = (await jwt.verify(
       token as string,
       configFiles.jwt_secret as string,
     )) as JwtPayload;
+
+    if (!decodedToken) {
+      throw new AppError(
+        status.UNAUTHORIZED,
+        "You must be logged in to access this feature",
+      );
+    }
     // check if the user exists
     const isUserExist = await userModel.isUserExist(decodedToken?.email);
     if (!isUserExist) {

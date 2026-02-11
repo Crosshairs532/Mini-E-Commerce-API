@@ -20,4 +20,27 @@ export const createProductSchema = z.object({
     .nonnegative("Stock cannot be negative"),
 });
 
-export const productValidation = { createProductSchema };
+export const updateProductSchema = z.object({
+  name: z
+    .string({ error: "Product name must be string" })
+    .trim()
+    .min(1, "Product name is required")
+    .optional(),
+  description: z
+    .string()
+    .trim()
+    .optional()
+    .default("No details has been given")
+    .optional(),
+  price: z
+    .number()
+    .int("Price must be an integer")
+    .nonnegative("Price cannot be negative")
+    .optional(),
+  stock: z
+    .number()
+    .int("Stock must be an integer")
+    .nonnegative("Stock cannot be negative")
+    .optional(),
+});
+export const productValidation = { createProductSchema, updateProductSchema };

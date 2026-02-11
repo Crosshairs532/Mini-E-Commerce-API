@@ -35,7 +35,29 @@ const createProduct = async (product: TProduct) => {
 
   return res;
 };
-const updateProduct = () => {};
+const updateProduct = async (
+  productData: Partial<TProduct>,
+  productId: string,
+) => {
+  // find the product
+  const isProductExist = await ProductModel.findOne({ _id: productId });
+  if (!isProductExist) {
+    throw new AppError(status.NOT_FOUND, "Product Not found");
+  }
+  // Update the product
+  const res = await ProductModel.findOneAndUpdate(
+    { _id: productId },
+    productData,
+    {
+      new: true,
+    },
+  );
+  if (!res) {
+    throw new AppError(status.INTERNAL_SERVER_ERROR, "Failed to update");
+  }
+  return res;
+};
+
 const deleteProduct = () => {};
 
 export const productService = {
