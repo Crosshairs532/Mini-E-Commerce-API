@@ -5,7 +5,16 @@ import schemaValidation from "../../middlewares/SchemaValidation";
 import { productController } from "./product.controller";
 const productRoutes = express.Router();
 
-productRoutes.get("/", Auth("admin"));
+productRoutes.get(
+  "/",
+  Auth("admin", "customer"),
+  productController.getAllProduct,
+);
+productRoutes.get(
+  "/:productId",
+  Auth("admin", "customer"),
+  productController.getSingleProduct,
+);
 productRoutes.post(
   "/create-product",
   Auth("admin"),
@@ -13,11 +22,15 @@ productRoutes.post(
   productController.createProduct,
 );
 productRoutes.patch(
-  "/create-update/:productId",
+  "/product-update/:productId",
   Auth("admin"),
   schemaValidation(productValidation.updateProductSchema),
   productController.updateProduct,
 );
-productRoutes.delete("/create-delete", Auth("admin"));
+productRoutes.patch(
+  "/product-delete/:productId",
+  Auth("admin"),
+  productController.deleteProduct,
+);
 
 export default productRoutes;
