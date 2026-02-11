@@ -48,6 +48,10 @@ const updateProduct = async (
   if (!isProductExist) {
     throw new AppError(status.NOT_FOUND, "Product Not found");
   }
+  // check if product is deleted or not
+  if (isProductExist.isDeleted) {
+    throw new AppError(status.GONE, "Product is Deleted!");
+  }
   // Update the product
   const res = await ProductModel.findOneAndUpdate(
     { _id: productId },

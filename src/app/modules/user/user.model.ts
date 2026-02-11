@@ -30,6 +30,10 @@ const userSchema = new Schema<TUser, UserModelType>(
       required: true,
       default: UserRole.CUSTOMER,
     },
+    cancellationCount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

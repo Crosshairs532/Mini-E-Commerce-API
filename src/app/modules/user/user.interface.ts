@@ -6,6 +6,7 @@ export interface TUser {
   email: string;
   password: string;
   role: Role;
+  cancellationCount: Number;
   createdAt: Date;
   updatedAt: Date;
 }
