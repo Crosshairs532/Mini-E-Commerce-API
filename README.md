@@ -53,44 +53,44 @@ open you terminal and follow the below instructions
 
 ## API Endpoints
 
-### 1. Authentication
+### 1. Authentication(/auth)
 
-| Method | Endpoint               | Access | Description           |
-| ------ | ---------------------- | ------ | --------------------- |
-| POST   | /api/auth/registration | Public | Register a new user   |
-| POST   | /api/auth/login        | Public | Login and receive JWT |
+| Method | Endpoint                  | Access | Description           |
+| ------ | ------------------------- | ------ | --------------------- |
+| POST   | /api/v1/auth/registration | Public | Register a new user   |
+| POST   | /api/v1/auth/login        | Public | Login and receive JWT |
 
 ---
 
 ### 2. Products
 
-| Method | Endpoint                                | Access | Description                       |
-| ------ | --------------------------------------- | ------ | --------------------------------- |
-| GET    | /api/products                           | All    | Fetch all active products         |
-| GET    | /api/products/:productId                | All    | Fetch details of a single product |
-| POST   | /api/products/create-product            | Admin  | Add new product to inventory      |
-| PATCH  | /api/products/product-update/:productId | Admin  | Update product details/stock      |
-| PATCH  | /api/products/product-delete/:productId | Admin  | Soft-delete a product             |
+| Method | Endpoint                                  | Access | Description                       |
+| ------ | ----------------------------------------- | ------ | --------------------------------- |
+| GET    | /api/v1/products                          | All    | Fetch all active products         |
+| GET    | /api/v1/product/:productId                | All    | Fetch details of a single product |
+| POST   | /api/v1/product/create-product            | Admin  | Add new product to inventory      |
+| PATCH  | /api/v1/product/product-update/:productId | Admin  | Update product details/stock      |
+| PATCH  | /api/v1/product/product-delete/:productId | Admin  | Soft-delete a product             |
 
 ---
 
 ### 3. Cart
 
-| Method | Endpoint                    | Access   | Description                    |
-| ------ | --------------------------- | -------- | ------------------------------ |
-| GET    | /api/cart                   | Customer | View current items in cart     |
-| POST   | /api/cart/add-to-cart       | Customer | Add a product to the cart      |
-| PATCH  | /api/cart/update            | Customer | Update item quantity in cart   |
-| DELETE | /api/cart/remove/:productId | Customer | Remove specific item from cart |
-| DELETE | /api/cart/clear             | Customer | Empty the entire cart          |
+| Method | Endpoint                       | Access   | Description                    |
+| ------ | ------------------------------ | -------- | ------------------------------ |
+| GET    | /api/v1/cart                   | Customer | View current items in cart     |
+| POST   | /api/v1/cart/add-to-cart       | Customer | Add a product to the cart      |
+| PATCH  | /api/v1/cart/update            | Customer | Update item quantity in cart   |
+| DELETE | /api/v1/cart/remove/:productId | Customer | Remove specific item from cart |
+| DELETE | /api/v1/cart/clear             | Customer | Empty the entire cart          |
 
 ---
 
 ### 4. Orders
 
-| Method | Endpoint                    | Access         | Description                                    |
-| ------ | --------------------------- | -------------- | ---------------------------------------------- |
-| POST   | /api/orders                 | Customer       | Place order (validates stock & clears cart)    |
-| GET    | /api/orders/my-orders       | Customer       | View personal order history                    |
-| GET    | /api/orders/:orderId        | Customer       | View specific order details                    |
-| PATCH  | /api/orders/:orderId/status | Admin/Customer | Update status (Pending/Shipped/Delivered/etc.) |
+| Method | Endpoint                      | Access         | Description                                          |
+| ------ | ----------------------------- | -------------- | ---------------------------------------------------- |
+| POST   | /api/v1/order                 | Customer       | Place order (validates stock & clears cart)          |
+| GET    | /api/v1/order/my-orders       | Customer       | View personal order history                          |
+| GET    | /api/v1/order/:orderId        | Customer       | View specific order details                          |
+| PATCH  | /api/v1/order/:orderId/status | Admin/Customer | Update status (Pending/Shipped/Delivered/CANCELLED.) |
